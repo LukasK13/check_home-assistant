@@ -4,6 +4,7 @@ import asyncio
 import json
 import asyncws
 import argparse
+import sys
 
 parser = argparse.ArgumentParser(prog="check_mailcow.py", description='Check Home-Assistant API for state')
 parser.add_argument("-u", "--url", dest='url', default="localhost:8123",
@@ -37,12 +38,16 @@ async def main():
                     print("OK: Home-Assistant version " + message['result']['homeassistant']['version'])
                 else:
                     print("Critical: missing key 'version'.")
+                    sys.exit(2)
             else:
                 print("Critical: missing key 'homeassistant'.")
+                sys.exit(2)
         else:
             print("Critical: missing key 'result'.")
+            sys.exit(2)
     else:
         print("Critical: got no response.")
+        sys.exit(2)
 
 
 loop = asyncio.get_event_loop()
