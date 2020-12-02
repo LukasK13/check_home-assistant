@@ -8,6 +8,8 @@ Plugin for checking a local Home-Assistant instance via the API using Icinga2 / 
 
 * **-u / --url** URL to the Home-Assistant API
 * **-t / --token** Long live access token for Home-Assistant.
+* **-s / --ssl** Use SSL for the connection to the Mailcow API
+* **-i / --insecure** Don't verify the SSL certificate
 
 # Icinga2 config
 ## Comand template
@@ -24,6 +26,14 @@ object CheckCommand "home-assistant" {
         "-u" = {
             description = "URL to the Home-Assistant API."
             value = "$home-assistant_url$"
+        }
+        "-i" = {
+            description = "Insecure connection. Don't verify the SSL certificate."
+            set_if = "$mailcow_insecure$"
+        }
+        "-s" = {
+            description = "Use SSL for the connection."
+            set_if = "$mailcow_ssl$"
         }
     }
 }
