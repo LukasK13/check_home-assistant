@@ -16,7 +16,7 @@ args = parser.parse_args()
 
 headers = {"Authorization": "Bearer " + args.token, "content-type": "application/json"}
 try:
-    res = req.get(("https" if args.ssl else "http") + "://" + args.url + "/api", headers=headers, verify=args.verify)
+    res = req.get(("https" if args.ssl else "http") + "://" + args.url + "/api/", headers=headers, verify=args.verify)
 except:
     print("Unknown: Connection refused.")
     sys.exit(3)
